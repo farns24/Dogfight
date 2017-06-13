@@ -32,6 +32,7 @@ public abstract class Pilot implements IPilot{
 		respond(remainingFuel,damage,ammo,enemies,bounds,bases,obsticals);
 	}
 	
-	public abstract void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals);
+	public abstract void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
+								 List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals);
 	
 }
