@@ -1,5 +1,7 @@
 package model;
 
+import states.State;
+
 import java.util.List;
 
 public abstract class Pilot implements IPilot{
@@ -17,6 +19,10 @@ public abstract class Pilot implements IPilot{
 
 	public IBiplane getPlane() {
 		return plane;
+	}
+
+	public State determineState() {
+		return null;
 	}
 
 	@Override
