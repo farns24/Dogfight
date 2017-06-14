@@ -18,7 +18,7 @@ public abstract class BattleField  implements IBattleField{
 	 * @param fighterIds
 	 * @param boundaryIds
 	 * @param antiAircraftIds
-	 * @param basetofighterMap - BaseId number and the fighterId that can refuel there. 
+	 * @param baseId2FighterIdMap - BaseId number and the fighterId that can refuel there.
 	 */
 	public BattleField(Set<Integer> fighterIds,Set<Integer> boundaryIds, Set<Integer> antiAircraftIds, Map<Integer,Integer> baseId2FighterIdMap)
 	{

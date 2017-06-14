@@ -1,5 +1,7 @@
 package model;
 
+import alpha_beta.AlphaBetaResult;
+import alpha_beta.AlphaBetaSolver;
 import model.decisions.Decider;
 import model.decisions.IDecision;
 
@@ -17,8 +19,10 @@ public class BasicPilot extends Pilot {
     @Override
     public void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
                         List<Base> bases, List<Obstical> obsticals) {
-        Decider d = new Decider();
-        IDecision decision = d.decide(fuelLeft, damage, ammoLeft, enemies, bounds, bases, obsticals);
+        AlphaBetaSolver solver = new AlphaBetaSolver();
+        AlphaBetaResult result = null; //solver.alphabeta()
+        Decider d = result.getDecider();
+        IDecision decision = d.getActionTaken();
         decision.execute();
     }
 }

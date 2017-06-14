@@ -9,10 +9,10 @@ import java.util.List;
  */
 public class Decider {
 
-    public IDecision decide(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
-                            List<Base> bases, List<Obstical> obsticals) {
-        //Alpha-beta pruning here
-        return null;
+    IDecision actionTook;
+
+    public Decider(IDecision actionTook) {
+        this.actionTook = actionTook;
     }
 
     public boolean isTerminal() {
@@ -28,5 +28,9 @@ public class Decider {
     public int getScore(Pilot p) {
         //Not yet implemented
         return 0;
+    }
+
+    public IDecision getActionTaken() {
+        return actionTook;
     }
 }
