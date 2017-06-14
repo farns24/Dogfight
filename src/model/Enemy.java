@@ -1,17 +1,17 @@
 package model;
 
-public class Enemy {
-    boolean isAlive;
+import java.util.List;
 
-    public Enemy() {
-        isAlive = true;
+public class Enemy extends Pilot {
+
+    public Enemy(IBiplane plane) {
+        super(plane);
     }
 
-    public void die() {
-        isAlive = false;
+    @Override
+    public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
+                        List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
+
     }
 
-    public boolean isAlive() {
-        return isAlive;
-    }
 }
