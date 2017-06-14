@@ -7,12 +7,13 @@ import java.util.List;
 /**
  * Created by michael on 6/12/17.
  */
-public class Decider {
+public class GameState {
 
     IDecision actionTook;
 
-    public Decider(IDecision actionTook) {
-        this.actionTook = actionTook;
+
+    public GameState(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
+                     List<Base> bases, List<Obstical> obsticals) {
     }
 
     public boolean isTerminal() {
@@ -20,7 +21,7 @@ public class Decider {
         return true;
     }
 
-    public List<Decider> getPosFutures(Pilot p, boolean maximizingPlayer) {
+    public List<GameState> getPosFutures(Pilot p, boolean maximizingPlayer) {
         //Not yet implemented
         return null;
     }

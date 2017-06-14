@@ -1,27 +1,27 @@
 package alpha_beta;
 
-import model.decisions.Decider;
+import model.decisions.GameState;
 
 public class AlphaBetaResult {
 
 	private int value;
-	private Decider decider;
+	private GameState gameState;
 	public int getValue() {
 		return value;
 	}
 	public void setValue(int value) {
 		this.value = value;
 	}
-	public Decider getDecider() {
-		return decider;
+	public GameState getGameState() {
+		return gameState;
 	}
-	public void setDecider(Decider decider) {
-		this.decider = decider;
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
 	}
-	public AlphaBetaResult(int value, Decider decider) {
+	public AlphaBetaResult(int value, GameState gameState) {
 		super();
 		this.value = value;
-		this.decider = decider;
+		this.gameState = gameState;
 	}
 	
 }

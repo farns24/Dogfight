@@ -1,28 +1,28 @@
 package alpha_beta;
 
 import model.Pilot;
-import model.decisions.Decider;
+import model.decisions.GameState;
 
 import java.util.List;
 
 public class AlphaBetaSolver {
-	public AlphaBetaResult alphabeta(Decider decider, int depth, int alphaBound, int betaBound, Boolean maximizingPlayer, Pilot pilot) {
+	public AlphaBetaResult alphabeta(GameState gameState, int depth, int alphaBound, int betaBound, Boolean maximizingPlayer, Pilot pilot) {
 		int v;
-		if (depth == 0 || decider.isTerminal()) {
-			return new AlphaBetaResult(decider.getScore(pilot), decider);
+		if (depth == 0 || gameState.isTerminal()) {
+			return new AlphaBetaResult(gameState.getScore(pilot), gameState);
 		}
 		if (maximizingPlayer) {
 			v = Integer.MIN_VALUE;
-			Decider bestChild = null;
-			List<Decider> posFutures = decider.getPosFutures(pilot,maximizingPlayer);
+			GameState bestChild = null;
+			List<GameState> posFutures = gameState.getPosFutures(pilot,maximizingPlayer);
 			if (posFutures.size()==0) {
-				return new AlphaBetaResult(0, decider);
+				return new AlphaBetaResult(0, gameState);
 			}
 			if (posFutures.size()==1)
 			{
 				return new AlphaBetaResult(0, posFutures.get(0));
 			}
-			for (Decider child : posFutures) {
+			for (GameState child : posFutures) {
 
 				//Look deeper if considering corner
 				int score = alphabeta(child, depth - 1, alphaBound, betaBound, false, pilot).getValue();
@@ -45,10 +45,10 @@ public class AlphaBetaSolver {
 			return new AlphaBetaResult(v, bestChild);
 		} else {
 			v = Integer.MAX_VALUE;
-			Decider bestChild = null;
-			List<Decider> posFutures = decider.getPosFutures(pilot,maximizingPlayer);
+			GameState bestChild = null;
+			List<GameState> posFutures = gameState.getPosFutures(pilot,maximizingPlayer);
 			if (posFutures.size()==0) {
-				return new AlphaBetaResult(0, decider);
+				return new AlphaBetaResult(0, gameState);
 			}
 			if (posFutures.size()==1)
 			{
@@ -56,7 +56,7 @@ public class AlphaBetaSolver {
 			}
 			
 			
-			for (Decider child : posFutures) {
+			for (GameState child : posFutures) {
 				
 				int score = alphabeta(child, depth - 1, alphaBound, betaBound, true, pilot).getValue();
 				

@@ -2,7 +2,7 @@ package model;
 
 import alpha_beta.AlphaBetaResult;
 import alpha_beta.AlphaBetaSolver;
-import model.decisions.Decider;
+import model.decisions.GameState;
 import model.decisions.IDecision;
 
 import java.util.List;
@@ -20,8 +20,8 @@ public class BasicPilot extends Pilot {
     public void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
                         List<Base> bases, List<Obstical> obsticals) {
         AlphaBetaSolver solver = new AlphaBetaSolver();
-        AlphaBetaResult result = null; //solver.alphabeta()
-        Decider d = result.getDecider();
+        AlphaBetaResult result = null;//solver.alphabeta();
+        GameState d = result.getGameState();
         IDecision decision = d.getActionTaken();
         decision.execute();
     }
