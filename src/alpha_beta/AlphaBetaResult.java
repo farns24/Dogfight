@@ -4,9 +4,9 @@ import model.decisions.GameState;
 
 public class AlphaBetaResult {
 
-	private int value;
+	private double value;
 	private GameState gameState;
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 	public void setValue(int value) {
@@ -18,7 +18,7 @@ public class AlphaBetaResult {
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState;
 	}
-	public AlphaBetaResult(int value, GameState gameState) {
+	public AlphaBetaResult(double value, GameState gameState) {
 		super();
 		this.value = value;
 		this.gameState = gameState;

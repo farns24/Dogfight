@@ -10,7 +10,15 @@ public abstract class Pilot implements IPilot{
 	{
 		this.plane = plane;
 	}
-	
+
+	public boolean isAlive() {
+		return plane.isAlive();
+	}
+
+	public IBiplane getPlane() {
+		return plane;
+	}
+
 	@Override
 	public void respondToEnvironment(INormalizedMap map) {
 		

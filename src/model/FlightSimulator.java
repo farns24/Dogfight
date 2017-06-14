@@ -77,4 +77,13 @@ public class FlightSimulator implements IBiplane {
 		return null;
 	}
 
+	@Override
+	public boolean isAlive() {
+		return false;
+	}
+
+	@Override
+	public void die() {
+
+	}
 }

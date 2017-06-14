@@ -46,9 +46,12 @@ public class GameState {
         return null;
     }
 
-    public int getScore(Pilot p) {
-        //Not yet implemented
-        return 0;
+    public double getScore() {
+        double score = 0;
+        for (Enemy enemy : enemies) {
+            score += enemy.getPlane().getDamage();
+        }
+        return score;
     }
 
     public IDecision getActionTaken() {

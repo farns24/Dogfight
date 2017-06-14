@@ -6,10 +6,11 @@ import model.decisions.GameState;
 import java.util.List;
 
 public class AlphaBetaSolver {
-	public AlphaBetaResult alphabeta(GameState gameState, int depth, int alphaBound, int betaBound, Boolean maximizingPlayer, Pilot pilot) {
-		int v;
+	public AlphaBetaResult alphabeta(GameState gameState, int depth, double alphaBound, double betaBound,
+									 Boolean maximizingPlayer, Pilot pilot) {
+		double v;
 		if (depth == 0 || gameState.isTerminal()) {
-			return new AlphaBetaResult(gameState.getScore(pilot), gameState);
+			return new AlphaBetaResult(gameState.getScore(), gameState);
 		}
 		if (maximizingPlayer) {
 			v = Integer.MIN_VALUE;
@@ -25,7 +26,8 @@ public class AlphaBetaSolver {
 			for (GameState child : posFutures) {
 
 				//Look deeper if considering corner
-				int score = alphabeta(child, depth - 1, alphaBound, betaBound, false, pilot).getValue();
+				double score = alphabeta(child, depth - 1, alphaBound, betaBound, false,
+						pilot).getValue();
 				if (score>v)
 				{
 					bestChild = child;
@@ -58,7 +60,8 @@ public class AlphaBetaSolver {
 			
 			for (GameState child : posFutures) {
 				
-				int score = alphabeta(child, depth - 1, alphaBound, betaBound, true, pilot).getValue();
+				double score = alphabeta(child, depth - 1, alphaBound, betaBound, true,
+						pilot).getValue();
 				
 				if (score<v)
 				{
@@ -78,7 +81,7 @@ public class AlphaBetaSolver {
 		}
 	}
 
-	private int min(int v, int alphabeta) {
+	private double min(double v, double alphabeta) {
 
 		if (v < alphabeta) {
 			return v;
@@ -87,7 +90,7 @@ public class AlphaBetaSolver {
 		return alphabeta;
 	}
 
-	private int max(int v, int alphabeta) {
+	private double max(double v, double alphabeta) {
 		if (v > alphabeta) {
 			return v;
 		}
