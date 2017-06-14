@@ -9,7 +9,7 @@ public class BritishPilot extends Pilot{
 	}
 
 	@Override
-	public void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
+	public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
 			List<Base> bases, List<Obstical> obsticals) {
 	
 		

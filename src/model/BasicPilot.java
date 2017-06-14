@@ -17,12 +17,12 @@ public class BasicPilot extends Pilot {
     }
 
     @Override
-    public void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
+    public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
                         List<Base> bases, List<Obstical> obsticals) {
         AlphaBetaSolver solver = new AlphaBetaSolver();
         AlphaBetaResult result = null;//solver.alphabeta();
-        GameState d = result.getGameState();
-        IDecision decision = d.getActionTaken();
+        GameState gs = result.getGameState();
+        IDecision decision = gs.getActionTaken();
         decision.execute();
     }
 }

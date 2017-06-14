@@ -21,6 +21,8 @@ public abstract class Pilot implements IPilot{
 		double damage = plane.getDamage();
 		
 		int ammo = plane.getAmmo();
+
+		boolean isAlive = plane.isAlive();
 		
 		List<Enemy> enemies = map.getEnemies();
 		
@@ -29,10 +31,11 @@ public abstract class Pilot implements IPilot{
 		List<Base> bases = map.getBases();
 		
 		List<Obstical> obsticals = map.getObsticals();
-		respond(remainingFuel,damage,ammo,enemies,bounds,bases,obsticals);
+
+		respond(isAlive, remainingFuel,damage,ammo,enemies,bounds,bases,obsticals);
 	}
 	
-	public abstract void respond(int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
+	public abstract void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
 								 List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals);
 	
 }

@@ -4,6 +4,8 @@ import java.util.Set;
 
 public class Biplane implements IBiplane {
 
+	private boolean isAlive = true;
+
 	@Override
 	public void goForward(int speed) throws OutOfFuelException {
 
@@ -76,4 +78,13 @@ public class Biplane implements IBiplane {
 		return null;
 	}
 
+	@Override
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	@Override
+	public void die() {
+		isAlive = false;
+	}
 }

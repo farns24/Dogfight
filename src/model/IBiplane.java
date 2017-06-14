@@ -45,6 +45,10 @@ public interface IBiplane {
 	public int getFuel();
 	
 	public void reFuel(int gallons);
+
+	public boolean isAlive();
+
+	public void die();
 	
 	public IAlarmSuite updateLocation(INormalizedMap map);
 	
