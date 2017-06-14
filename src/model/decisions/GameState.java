@@ -33,6 +33,19 @@ public class GameState {
         this.obsticals = obsticals;
     }
 
+    public GameState(IDecision actionTook, boolean isAlive, int fuelLeft, double damage, int ammoLeft,
+                     List<Enemy> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
+        this.actionTook = actionTook;
+        this.isAlive = isAlive;
+        this.fuelLeft = fuelLeft;
+        this.damage = damage;
+        this.ammoLeft = ammoLeft;
+        this.enemies = enemies;
+        this.bounds = bounds;
+        this.bases = bases;
+        this.obsticals = obsticals;
+    }
+
     public boolean isTerminal() {
         if(!isAlive) return true;
         boolean enemiesRemain = false;
@@ -45,21 +58,44 @@ public class GameState {
     public List<GameState> getPosFutures(Pilot p, boolean maximizingPlayer) {
         List<GameState> list = new ArrayList<>();
         IBiplane plane = p.getPlane();
-        GameState newState = new GameState(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+        GameState newState = null;
+
+        Refuel refuel = new Refuel();
+        newState = refuel.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                        enemies, bounds, bases, obsticals);
+        list.add(newState);
+
+        Reload reload = new Reload();
+        newState = reload.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
                 enemies, bounds, bases, obsticals);
+        list.add(newState);
 
-        if (p.getPlane().getFuel() == 0) {
-            newState.setAction(new Refuel());
-            list.add(newState);
-            return list;    //Only available option
-        }
+        Fire fire = new Fire();
+        newState = fire.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+        list.add(newState);
 
-        if (p.getPlane().getAmmo() == 0) {
-            newState.setAction(new Reload());
-            list.add(newState);
-        }
-        //Not yet implemented
-        return null;
+        SlowDown slowDown = new SlowDown(1);
+        newState = slowDown.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+        list.add(newState);
+
+        SpeedUp speedUp = new SpeedUp(1);
+        newState = speedUp.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+        list.add(newState);
+
+        SwerveLeft swerveLeft = new SwerveLeft(5);
+        newState = swerveLeft.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+        list.add(newState);
+
+        SwerveRight swerveRight = new SwerveRight(5);
+        newState = swerveRight.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+        list.add(newState);
+
+        return list;
     }
 
     public double getScore() {
