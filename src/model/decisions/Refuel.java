@@ -12,4 +12,9 @@ public class Refuel implements IDecision {
     public void execute() {
 
     }
+
+    @Override
+    public void simulate() {
+
+    }
 }

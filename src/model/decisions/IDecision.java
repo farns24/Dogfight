@@ -5,4 +5,5 @@ package model.decisions;
  */
 public interface IDecision {
     public void execute();
+    public void simulate();
 }

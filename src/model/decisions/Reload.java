@@ -12,4 +12,9 @@ public class Reload implements IDecision {
     public void execute() {
 
     }
+
+    @Override
+    public void simulate() {
+
+    }
 }

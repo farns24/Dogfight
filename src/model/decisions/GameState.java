@@ -2,6 +2,7 @@ package model.decisions;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +43,21 @@ public class GameState {
     }
 
     public List<GameState> getPosFutures(Pilot p, boolean maximizingPlayer) {
+        List<GameState> list = new ArrayList<>();
+        IBiplane plane = p.getPlane();
+        GameState newState = new GameState(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals);
+
+        if (p.getPlane().getFuel() == 0) {
+            newState.setAction(new Refuel());
+            list.add(newState);
+            return list;    //Only available option
+        }
+
+        if (p.getPlane().getAmmo() == 0) {
+            newState.setAction(new Reload());
+            list.add(newState);
+        }
         //Not yet implemented
         return null;
     }
@@ -56,5 +72,9 @@ public class GameState {
 
     public IDecision getActionTaken() {
         return actionTook;
+    }
+
+    public void setAction(IDecision action) {
+        this.actionTook = action;
     }
 }

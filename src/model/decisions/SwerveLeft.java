@@ -15,4 +15,9 @@ public class SwerveLeft implements IDecision {
     public void execute() {
 
     }
+
+    @Override
+    public void simulate() {
+
+    }
 }

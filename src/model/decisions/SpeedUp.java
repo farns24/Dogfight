@@ -15,4 +15,9 @@ public class SpeedUp implements IDecision {
     public void execute() {
 
     }
+
+    @Override
+    public void simulate() {
+
+    }
 }
