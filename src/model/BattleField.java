@@ -3,6 +3,7 @@ package model;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public abstract class BattleField  implements IBattleField{
@@ -31,7 +32,7 @@ public abstract class BattleField  implements IBattleField{
 		//Initialize pilots
 		for (Integer pilotId: fighterIds)
 		{
-			
+			pilots.put(pilotId, new BritishPilot(new FlightSimulator()));
 		}
 		
 		
@@ -73,7 +74,13 @@ public abstract class BattleField  implements IBattleField{
 		
 		//Update pilots
 		
-		
+		for (Entry<Integer,Pilot> entry :pilots.entrySet())
+		{
+			
+			INormalizedMap normMap = null;
+			//Build normalized Map
+			entry.getValue().respondToEnvironment(normMap);
+		}
 		
 		
 	}

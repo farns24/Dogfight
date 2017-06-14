@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Set;
 
 public class Biplane implements IBiplane {
@@ -74,7 +75,9 @@ public class Biplane implements IBiplane {
 
 	@Override
 	public IAlarmSuite updateLocation(INormalizedMap map) {
-		// TODO Auto-generated method stub
+		
+		List<Base> bases = map.getBases();
+		
 		return null;
 	}
 
