@@ -1,9 +1,6 @@
 package model.decisions;
 
-import model.Base;
-import model.Boundaries;
-import model.Enemy;
-import model.Obstical;
+import model.*;
 
 import java.util.List;
 
@@ -16,5 +13,20 @@ public class Decider {
                             List<Base> bases, List<Obstical> obsticals) {
         //Alpha-beta pruning here
         return null;
+    }
+
+    public boolean isTerminal() {
+        //Not yet implemented
+        return true;
+    }
+
+    public List<Decider> getPosFutures(Pilot p, boolean maximizingPlayer) {
+        //Not yet implemented
+        return null;
+    }
+
+    public int getScore(Pilot p) {
+        //Not yet implemented
+        return 0;
     }
 }
