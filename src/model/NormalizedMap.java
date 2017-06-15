@@ -68,7 +68,7 @@ public class NormalizedMap implements INormalizedMap {
 
 	@Override
 	public String toString() {
-	double dimen = 20;
+	double dimen = 40;
 	char[][] map = new char[(int) dimen][(int) dimen];
 	int center = (int) (dimen/2.0);
 	map[center][center] = 'P';

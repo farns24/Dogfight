@@ -12,6 +12,12 @@ public class Position implements IPosition {
 		this.dir = 0;
 	}
 
+	public Position(int key, RobotLocation value) {
+		this.id = key;
+		this.coord = value.getCenter();
+		this.dir = value.getOrientation();
+	}
+
 	@Override
 	public int getId() {
 		// TODO Auto-generated method stub

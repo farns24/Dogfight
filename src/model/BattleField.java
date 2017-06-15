@@ -87,6 +87,7 @@ public abstract class BattleField  implements IBattleField{
 			INormalizedMap normMap = new NormalizedMap(fighter,pilots2Position);
 			//Build normalized Map
 			entry.getValue().respondToEnvironment(normMap);
+			System.out.println(normMap.toString());
 		}
 		
 		
