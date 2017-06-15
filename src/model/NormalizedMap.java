@@ -3,14 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class NormalizedMap implements INormalizedMap {
 
 	
 	private List<EnemyPosition> enemies = new ArrayList<EnemyPosition>();
+	private List<Boundaries> bounds = new ArrayList<Boundaries>();
+	private List<Base> bases;
 
-	public NormalizedMap(IPosition fighter, HashMap<Integer, IPosition> pilots2Position) {
+	public NormalizedMap(IPosition fighter, HashMap<Integer, IPosition> pilots2Position, HashMap<Integer, IPosition> bounds2Positions, HashMap<Integer, IPosition> antiAir2Positions, HashMap<Integer, IPosition> base2position, Map<Integer, Integer> base2Fighters) {
 		
 		//Transformation of positions
 		
@@ -21,6 +24,20 @@ public class NormalizedMap implements INormalizedMap {
 				IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
 				enemies.add(new EnemyPosition(normPos));
 			}
+		}
+		
+		for (Entry<Integer,IPosition> entry: bounds2Positions.entrySet())
+		{
+			
+				IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
+				bounds.add(new Boundaries(normPos));
+		}
+		
+		for (Entry<Integer,IPosition> entry: base2position.entrySet())
+		{
+			
+				IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
+				bases.add(new Base(normPos));
 		}
 		
 		
@@ -44,20 +61,17 @@ public class NormalizedMap implements INormalizedMap {
 
 	@Override
 	public List<EnemyPosition> getEnemies() {
-		// TODO Auto-generated method stub
 		return enemies ;
 	}
 
 	@Override
 	public List<Boundaries> getBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		return bounds ;
 	}
 
 	@Override
 	public List<Base> getBases() {
-		// TODO Auto-generated method stub
-		return null;
+		return bases;
 	}
 
 	@Override
@@ -75,12 +89,21 @@ public class NormalizedMap implements INormalizedMap {
 	
 	for (EnemyPosition en: enemies)
 	{
-		if (Math.abs(en.getCoord()[0])<dimen/2.0
-				&&  Math.abs(en.getCoord()[1])<dimen/2.0)
+		if (isOnMap(en,center))
 		{
 			int screenX = (int)(en.getCoord()[0]+ center);
 			int screenY = (int) (en.getCoord()[1]+ center);
 			map[screenX][screenY] = 'e';
+		}
+	}
+	
+	for (Boundaries en: bounds)
+	{
+		if (isOnMap(en,center))
+		{
+			int screenX = (int)(en.getCoord()[0]+ center);
+			int screenY = (int) (en.getCoord()[1]+ center);
+			map[screenX][screenY] = 'B';
 		}
 	}
 	
@@ -104,6 +127,11 @@ public class NormalizedMap implements INormalizedMap {
 		
 		
 		return sb.toString();
+	}
+
+	private boolean isOnMap(IPosition en, int center) {
+		return Math.abs(en.getCoord()[0])<center
+				&&  Math.abs(en.getCoord()[1])<center;
 	}
 
 	

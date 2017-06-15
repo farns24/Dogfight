@@ -14,6 +14,9 @@ public abstract class BattleField  implements IBattleField{
 	protected Map<Integer, Integer> base2Fighters;
 	protected Map<Integer,Pilot> pilots;
 	private HashMap<Integer, IPosition> pilots2Position;
+	private HashMap<Integer, IPosition> bounds2Positions;
+	private HashMap<Integer, IPosition> antiAir2Positions;
+	private HashMap<Integer, IPosition> base2position;
 
 	/**
 	 * Each card and robot has an id associated with it. If that id is not 
@@ -30,6 +33,9 @@ public abstract class BattleField  implements IBattleField{
 		this.base2Fighters = baseId2FighterIdMap;
 		this.pilots = new HashMap<Integer,Pilot>();
 		this.pilots2Position = new HashMap<Integer,IPosition>();
+		bounds2Positions = new HashMap<Integer, IPosition>();
+		antiAir2Positions = new HashMap<Integer, IPosition>();
+		base2position = new HashMap<Integer, IPosition>();
 		
 		//Initialize pilots
 		for (Integer pilotId: fighterIds)
@@ -57,14 +63,17 @@ public abstract class BattleField  implements IBattleField{
 			else if (boundaryIds.contains(pos.getId()))
 			{
 				//add to Boundaries
+				bounds2Positions.put(pos.getId(),pos);
 				continue;
 			}
 			else if (antiAircraftIds.contains(pos.getId()))
 			{
+				antiAir2Positions.put(pos.getId(),pos);
 				continue;
 			}
 			else if (base2Fighters.keySet().contains(pos.getId()))
 			{
+				base2position.put(pos.getId(),pos);
 				continue;
 			}
 			else
@@ -84,7 +93,7 @@ public abstract class BattleField  implements IBattleField{
 			IPosition fighter = pilots2Position.get(entry.getKey());
 			
 			
-			INormalizedMap normMap = new NormalizedMap(fighter,pilots2Position);
+			INormalizedMap normMap = new NormalizedMap(fighter,pilots2Position, bounds2Positions,antiAir2Positions,base2position,base2Fighters);
 			//Build normalized Map
 			entry.getValue().respondToEnvironment(normMap);
 			System.out.println(normMap.toString());

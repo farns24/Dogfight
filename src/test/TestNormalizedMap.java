@@ -30,7 +30,7 @@ public class TestNormalizedMap {
 			
 			@Override
 			public double getDirection() {
-				return Math.PI/6.0;
+				return Math.PI/1.0;
 			}
 			
 			@Override
@@ -41,7 +41,13 @@ public class TestNormalizedMap {
 		HashMap<Integer, IPosition> pilots2Position = new HashMap<Integer,IPosition>();
 		pilots2Position.put(2, new Position(0, 5, 2));
 		
-		NormalizedMap theBarronsMap = new NormalizedMap(fighter, pilots2Position);
+		HashMap<Integer, IPosition> bounds2Position = new HashMap<Integer, IPosition>();
+		bounds2Position.put(3, new Position(0, 0, 3));
+		bounds2Position.put(4, new Position(0, 10, 4));
+		bounds2Position.put(5, new Position(10, 10, 5));
+		bounds2Position.put(6, new Position(10, 0, 6));
+		
+		NormalizedMap theBarronsMap = new NormalizedMap(fighter, pilots2Position, bounds2Position , null, null, null);
 		
 		
 		System.out.println(theBarronsMap.toString());
