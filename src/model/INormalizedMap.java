@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface INormalizedMap {
 
-	List<Enemy> getEnemies();
+	List<EnemyPosition> getEnemies();
 
 	List<Boundaries> getBounds();
 

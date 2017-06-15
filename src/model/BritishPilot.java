@@ -9,9 +9,8 @@ public class BritishPilot extends Pilot{
 	}
 
 	@Override
-	public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies, List<Boundaries> bounds,
-			List<Base> bases, List<Obstical> obsticals) {
-	
+	public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<EnemyPosition> enemies,
+			List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
 		
 		try {
 			plane.goForward(5);
@@ -20,9 +19,10 @@ public class BritishPilot extends Pilot{
 			e.printStackTrace();
 		}
 		
+		
 	}
 
-
+	
 
 
 }
