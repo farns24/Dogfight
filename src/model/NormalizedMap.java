@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map.Entry;
 public class NormalizedMap implements INormalizedMap {
 
 	
+	private static final int MapSize = 200;
 	private List<EnemyPosition> enemies = new ArrayList<EnemyPosition>();
 	private List<Boundaries> bounds = new ArrayList<Boundaries>();
 	private List<Base> bases;
@@ -25,12 +27,110 @@ public class NormalizedMap implements INormalizedMap {
 				enemies.add(new EnemyPosition(normPos));
 			}
 		}
-		
+		// Design change on Boundaries. One square for the root corner the boundaries. the square is formed around the one corner
 		for (Entry<Integer,IPosition> entry: bounds2Positions.entrySet())
 		{
 			
-				IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
-				bounds.add(new Boundaries(normPos));
+		
+			
+			int boundX = entry.getValue().getCoord()[0];
+			int boundY= entry.getValue().getCoord()[1];
+				
+				for (int i = 0; i< MapSize; i++)
+				{
+
+					IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
+				
+					bounds.add(new Boundaries(normPos));
+					
+					//System.out.println(i);
+					final int inc = i;
+					//IPosition normPos2 = normalizePosition(fighter,entry.getValue(),entry.getKey());
+					bounds.add(new Boundaries( normalizePosition(fighter,new IPosition() {
+						
+						@Override
+						public int getId() {
+						
+							return entry.getKey();
+						}
+						
+						@Override
+						public double getDirection() {
+							
+							return 0;
+						}
+						
+						@Override
+						public int[] getCoord() {
+							
+							return new int[]{boundX,boundY+inc};
+						}
+					}, entry.getKey())));
+					
+					bounds.add(new Boundaries( normalizePosition(fighter,new IPosition() {
+						
+						@Override
+						public int getId() {
+						
+							return entry.getKey();
+						}
+						
+						@Override
+						public double getDirection() {
+							
+							return 0;
+						}
+						
+						@Override
+						public int[] getCoord() {
+							
+							return new int[]{boundX+MapSize,boundY+inc};
+						}
+					}, entry.getKey())));
+					bounds.add(new Boundaries( normalizePosition(fighter,new IPosition() {
+						
+						@Override
+						public int getId() {
+						
+							return entry.getKey();
+						}
+						
+						@Override
+						public double getDirection() {
+							
+							return 0;
+						}
+						
+						@Override
+						public int[] getCoord() {
+							
+							return new int[]{boundX+inc,boundY};
+						}
+					}, entry.getKey())));
+					bounds.add(new Boundaries( normalizePosition(fighter,new IPosition() {
+						
+						@Override
+						public int getId() {
+						
+							return entry.getKey();
+						}
+						
+						@Override
+						public double getDirection() {
+							
+							return 0;
+						}
+						
+						@Override
+						public int[] getCoord() {
+							
+							return new int[]{boundX+inc,boundY+MapSize};
+						}
+					}, entry.getKey())));
+					
+
+				}
+				
 		}
 		
 		for (Entry<Integer,IPosition> entry: base2position.entrySet())
@@ -43,7 +143,7 @@ public class NormalizedMap implements INormalizedMap {
 		
 	}
 
-	private IPosition normalizePosition(IPosition fighter, IPosition enemy, Integer id) {
+	protected IPosition normalizePosition(IPosition fighter, IPosition enemy, Integer id) {
 		
 		double theta = fighter.getDirection();
 		
@@ -54,9 +154,10 @@ public class NormalizedMap implements INormalizedMap {
 		globalX -= fighter.getCoord()[0];
 		globalY -= fighter.getCoord()[1];
 		
-		double normX = globalX *Math.cos(theta)+ globalY* Math.sin(theta);
-		double normY = -1*globalX *Math.sin(theta)+ globalY* Math.cos(theta);
-		return new Position(normX,normY,id);
+		double normX =globalX *Math.cos(theta)+ globalY* Math.sin(theta);
+		double normY = -1.0 *globalX *Math.sin(theta)+ globalY* Math.cos(theta);
+		//System.out.println("Normalized X: " + normX);
+		return new Position(normX * -1.0,normY,id);
 	}
 
 	@Override
@@ -82,7 +183,7 @@ public class NormalizedMap implements INormalizedMap {
 
 	@Override
 	public String toString() {
-	double dimen = 40;
+	double dimen = 80;
 	char[][] map = new char[(int) dimen][(int) dimen];
 	int center = (int) (dimen/2.0);
 	map[center][center] = 'P';
@@ -99,18 +200,20 @@ public class NormalizedMap implements INormalizedMap {
 	
 	for (Boundaries en: bounds)
 	{
+		//System.out.println("Boundary Considered");
 		if (isOnMap(en,center))
 		{
 			int screenX = (int)(en.getCoord()[0]+ center);
 			int screenY = (int) (en.getCoord()[1]+ center);
+			//System.out.println("Boundary Drawn");
 			map[screenX][screenY] = 'B';
 		}
 	}
 	
 	StringBuilder sb = new StringBuilder();
-		for (int i = 0; i<dimen; i++)
+	for (int j = 0; j<dimen; j++)
 		{
-			for (int j = 0; j<dimen; j++)
+		for (int i = 0; i<dimen; i++)
 			{
 				if (map[i][j]==0)
 				{
@@ -130,6 +233,7 @@ public class NormalizedMap implements INormalizedMap {
 	}
 
 	private boolean isOnMap(IPosition en, int center) {
+		//System.out.println(Arrays.toString(en.getCoord()));
 		return Math.abs(en.getCoord()[0])<center
 				&&  Math.abs(en.getCoord()[1])<center;
 	}

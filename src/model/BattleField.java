@@ -40,7 +40,7 @@ public abstract class BattleField  implements IBattleField{
 		//Initialize pilots
 		for (Integer pilotId: fighterIds)
 		{
-			pilots.put(pilotId, new BritishPilot(new FlightSimulator()));
+			pilots.put(pilotId, new BritishPilot(new SopwithCamel()));
 		}
 		
 		

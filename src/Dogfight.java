@@ -19,10 +19,10 @@ public class Dogfight {
         Set<Integer> fighterIds = new TreeSet<Integer>();
         fighterIds.add(5);
 		Set<Integer> boundaryIds = new TreeSet<Integer>();
-		boundaryIds.add(78);
-		boundaryIds.add(26);
-		boundaryIds.add(75);
-		boundaryIds.add(94);
+		boundaryIds.add(79);
+		boundaryIds.add(27);
+		boundaryIds.add(76);
+		boundaryIds.add(95);
 		
 		Set<Integer> antiAircraftIds = new TreeSet<Integer>();
 		Map<Integer, Integer> baseId2FighterIdMap = new HashMap<Integer, Integer>();
