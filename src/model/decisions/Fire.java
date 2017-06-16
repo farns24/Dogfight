@@ -31,14 +31,17 @@ public class Fire implements IDecision {
 
         if (c.INENEMYSIGHTS()) {
             newState.setDamage(damage + .1);
-        } else if (c.ENEMYINSIGHTS()) {
-            if (ammoLeft >= ammoUsed) {
+        } else if (c.ENEMYINSIGHTS() && !c.OUTOFAMMO()) {
                 //Damage appropriate enemy
-            }
-        } else if (c.APPROACHINGOBSTACLE()) {
+        } else if (c.APPROACHINGOBSTACLE() && !c.OUTOFFUEL()) {
             newState.setAlive(false);
         }
-        newState.setAmmoLeft(ammoLeft-ammoUsed);
+        if (!c.OUTOFAMMO()) {
+            newState.setAmmoLeft(ammoLeft-ammoUsed);
+            if (newState.getAmmoLeft() < ammoUsed) {
+                newState.getConditions().setOUTOFAMMO(true);
+            }
+        }
         //Change enemies positions && change ENEMYINSIGHTS, INENEMYSIGHTS and SEARCHING accordingly
         return newState;
     }

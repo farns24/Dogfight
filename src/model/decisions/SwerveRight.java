@@ -32,7 +32,6 @@ public class SwerveRight implements IDecision {
         GameState newState = new GameState(new SwerveRight(plane, 5), isAlive, fuelLeft, damage, ammoLeft,
                 enemies, bounds, bases, obsticals, c);
 
-
         if (c.OUTOFFUEL() && c.INENEMYSIGHTS()) {
             newState.setDamage(damage + .1);
         } else if (c.ENEMYINSIGHTS()) {

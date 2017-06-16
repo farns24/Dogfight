@@ -49,7 +49,7 @@ public class SwerveLeft implements IDecision {
             }
         }
         //Test if approaching obstacle
-        //Change enemies positions && change ENEMYINSIGHTS and INENEMYSIGHTS accordingly
+        //Change enemies positions && change ENEMYINSIGHTS, INENEMYSIGHTS and SEARCHING accordingly
 
         return newState;
     }

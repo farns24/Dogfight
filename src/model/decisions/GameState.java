@@ -137,6 +137,10 @@ public class GameState {
         this.damage = damage;
     }
 
+    public int getAmmoLeft() {
+        return ammoLeft;
+    }
+
     public void setAmmoLeft(int ammoLeft) {
         this.ammoLeft = ammoLeft;
     }
