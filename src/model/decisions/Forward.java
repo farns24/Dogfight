@@ -32,17 +32,18 @@ public class Forward implements IDecision {
 
         if (c.INENEMYSIGHTS()) {
             newState.setDamage(damage + .1);
-        } else if (c.ENEMYINSIGHTS()) {
-            //Move self
-        } else if (c.APPROACHINGOBSTACLE()) {
-            //Move self
+        }else if (c.APPROACHINGOBSTACLE()) {
             newState.setAlive(false);
-        } else if (c.SEARCHING()) {
-            //Move self
+        }
+        if (!c.OUTOFFUEL()) {
+            //move self
+            newState.setFuelLeft(fuelLeft-fuelConsumption);
+            if (newState.getFuelLeft() < fuelConsumption) {
+                newState.getConditions().setOUTOFFUEL(true);
+            }
         }
         //Test if approaching obstacle
         //Change enemies positions && change ENEMYINSIGHTS, INENEMYSIGHTS and SEARCHING accordingly
-        newState.setFuelLeft(fuelLeft - fuelConsumption);
 
         return newState;
     }

@@ -36,20 +36,21 @@ public class SwerveRight implements IDecision {
         if (c.OUTOFFUEL() && c.INENEMYSIGHTS()) {
             newState.setDamage(damage + .1);
         } else if (c.ENEMYINSIGHTS()) {
-            //Move self
             newState.getConditions().setENEMYINSIGHTS(false);
         } else if (c.INENEMYSIGHTS()) {
-            //Move self
             newState.getConditions().setINENEMYSIGHTS(false);
         } else if (c.APPROACHINGOBSTACLE()) {
-            //Move self
             newState.getConditions().setAPPROACHINGOBSTACLE(false);
-        } else if (c.SEARCHING()) {
-            //Move self
+        }
+        if (!c.OUTOFFUEL()) {
+            //Move Self
+            newState.setFuelLeft(fuelLeft - fuelConsumption);
+            if (newState.getFuelLeft() < fuelConsumption) {
+                newState.getConditions().setOUTOFFUEL(true);
+            }
         }
         //Test if approaching obstacle
         //Change enemies positions && change ENEMYINSIGHTS, INENEMYSIGHTS and SEARCHING accordingly
-        newState.setFuelLeft(fuelLeft - fuelConsumption);
 
         return newState;
     }
