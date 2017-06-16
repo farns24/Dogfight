@@ -96,8 +96,13 @@ public class GameState {
                 enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
-        SwerveRight swerveRight = new SwerveRight(5);
+        SwerveRight swerveRight = new SwerveRight(plane, 5);
         newState = swerveRight.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
+                enemies, bounds, bases, obsticals, conditions);
+        list.add(newState);
+
+        Forward forward = new Forward(plane);
+        newState = forward.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
                 enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
@@ -142,5 +147,9 @@ public class GameState {
 
     public void setConditions(Conditions conditions) {
         this.conditions = conditions;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }
