@@ -27,7 +27,8 @@ public class Forward implements IDecision {
 
         if (currentState.getConditions().INENEMYSIGHTS()) {
             newState.setDamage(currentState.getDamage() + .1);
-        }else if (currentState.getConditions().APPROACHINGOBSTACLE()) {
+        }
+        if (currentState.getConditions().APPROACHINGOBSTACLE()) {
             newState.setAlive(false);
         }
         if (!currentState.getConditions().OUTOFFUEL()) {

@@ -24,9 +24,11 @@ public class Fire implements IDecision {
 
         if (currentState.getConditions().INENEMYSIGHTS()) {
             newState.setDamage(currentState.getDamage() + .1);
-        } else if (currentState.getConditions().ENEMYINSIGHTS() && !currentState.getConditions().OUTOFAMMO()) {
+        }
+        if (currentState.getConditions().ENEMYINSIGHTS() && !currentState.getConditions().OUTOFAMMO()) {
                 //Damage appropriate enemy
-        } else if (currentState.getConditions().APPROACHINGOBSTACLE() && !currentState.getConditions().OUTOFFUEL()) {
+        }
+        if (currentState.getConditions().APPROACHINGOBSTACLE() && !currentState.getConditions().OUTOFFUEL()) {
             newState.setAlive(false);
         }
         if (!currentState.getConditions().OUTOFAMMO()) {

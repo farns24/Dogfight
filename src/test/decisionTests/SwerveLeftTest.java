@@ -34,6 +34,11 @@ public class SwerveLeftTest {
                 false, false);
         currentState.setConditions(c);
         GameState result = swerveLeft.simulate(currentState);
+        Conditions rc = result.getConditions();
+        assert(!rc.ENEMYINSIGHTS());
+        assert(!rc.INENEMYSIGHTS());
+        assert(!rc.OUTOFAMMO());
+        assert(!rc.OUTOFFUEL());
     }
 
 }
