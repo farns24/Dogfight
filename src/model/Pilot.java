@@ -1,6 +1,7 @@
 package model;
 
-import states.State;
+import Conditions.Conditions;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public abstract class Pilot implements IPilot{
 		return plane;
 	}
 
-	public State determineState() {
-		return null;
+	public Conditions determineConditions() {
+		throw new NotImplementedException();
 	}
 
 	@Override

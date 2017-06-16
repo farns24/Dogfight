@@ -2,6 +2,7 @@ package model;
 
 import java.util.Set;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import telnet.TaskException;
 import telnet.TelnetProxy;
 
@@ -111,4 +112,8 @@ public class SopwithCamel implements IBiplane {
 		return null;
 	}
 
+	@Override
+	public Position getPosition() {
+		throw new NotImplementedException();
+	}
 }

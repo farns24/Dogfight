@@ -1,7 +1,7 @@
 package model.decisions;
 
 import model.*;
-import states.State;
+import Conditions.Conditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +20,10 @@ public class GameState {
     List<Boundaries> bounds;
     List<Base> bases;
     List<Obstical> obsticals;
+    Conditions conditions;
 
     public GameState(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
-                     List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
+                     List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals, Conditions conditions) {
         this.actionTook = null;
         this.isAlive = isAlive;
         this.fuelLeft = fuelLeft;
@@ -32,10 +33,12 @@ public class GameState {
         this.bounds = bounds;
         this.bases = bases;
         this.obsticals = obsticals;
+        this.conditions = conditions;
     }
 
     public GameState(IDecision actionTook, boolean isAlive, int fuelLeft, double damage, int ammoLeft,
-                     List<Enemy> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
+                     List<Enemy> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals,
+                     Conditions conditions) {
         this.actionTook = actionTook;
         this.isAlive = isAlive;
         this.fuelLeft = fuelLeft;
@@ -45,6 +48,7 @@ public class GameState {
         this.bounds = bounds;
         this.bases = bases;
         this.obsticals = obsticals;
+        this.conditions = conditions;
     }
 
     public boolean isTerminal() {
@@ -60,41 +64,41 @@ public class GameState {
         List<GameState> list = new ArrayList<>();
         IBiplane plane = p.getPlane();
         GameState newState = null;
-        State state = p.determineState();
+        Conditions conditions = p.determineConditions();
 
         Refuel refuel = new Refuel();
         newState = refuel.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                        enemies, bounds, bases, obsticals, state);
+                        enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         Reload reload = new Reload();
         newState = reload.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         Fire fire = new Fire();
         newState = fire.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         SlowDown slowDown = new SlowDown(1);
         newState = slowDown.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         SpeedUp speedUp = new SpeedUp(1);
         newState = speedUp.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
-        SwerveLeft swerveLeft = new SwerveLeft(5);
+        SwerveLeft swerveLeft = new SwerveLeft(plane, 5);
         newState = swerveLeft.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         SwerveRight swerveRight = new SwerveRight(5);
         newState = swerveRight.simulate(p.isAlive(), plane.getFuel(), plane.getDamage(), plane.getAmmo(),
-                enemies, bounds, bases, obsticals, state);
+                enemies, bounds, bases, obsticals, conditions);
         list.add(newState);
 
         return list;
@@ -116,6 +120,10 @@ public class GameState {
         this.actionTook = action;
     }
 
+    public int getFuelLeft() {
+        return fuelLeft;
+    }
+
     public void setFuelLeft(int fuelLeft) {
         this.fuelLeft = fuelLeft;
     }
@@ -126,5 +134,13 @@ public class GameState {
 
     public void setAmmoLeft(int ammoLeft) {
         this.ammoLeft = ammoLeft;
+    }
+
+    public Conditions getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(Conditions conditions) {
+        this.conditions = conditions;
     }
 }

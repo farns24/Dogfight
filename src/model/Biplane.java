@@ -1,5 +1,7 @@
 package model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.List;
 import java.util.Set;
 
@@ -89,5 +91,10 @@ public class Biplane implements IBiplane {
 	@Override
 	public void die() {
 		isAlive = false;
+	}
+
+	@Override
+	public Position getPosition() {
+		throw new NotImplementedException();
 	}
 }

@@ -1,5 +1,7 @@
 package model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.Set;
 
 public class FlightSimulator implements IBiplane {
@@ -84,6 +86,11 @@ public class FlightSimulator implements IBiplane {
 
 	@Override
 	public void die() {
+		throw new NotImplementedException();
+	}
 
+	@Override
+	public Position getPosition() {
+		throw new NotImplementedException();
 	}
 }
