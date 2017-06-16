@@ -30,13 +30,10 @@ public class Forward implements IDecision {
         GameState newState = new GameState(new Forward(plane), isAlive, fuelLeft, damage, ammoLeft, enemies, bounds,
                 bases, obsticals, c);
 
-        if (c.OUTOFFUEL() && c.INENEMYSIGHTS()) {
+        if (c.INENEMYSIGHTS()) {
             newState.setDamage(damage + .1);
         } else if (c.ENEMYINSIGHTS()) {
             //Move self
-        } else if (c.INENEMYSIGHTS()) {
-            //Move self
-            newState.setDamage(damage + .1);
         } else if (c.APPROACHINGOBSTACLE()) {
             //Move self
             newState.setAlive(false);
