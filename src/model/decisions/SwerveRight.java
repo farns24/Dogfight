@@ -31,13 +31,13 @@ public class SwerveRight implements IDecision {
         if (currentState.getConditions().OUTOFFUEL() && currentState.getConditions().INENEMYSIGHTS()) {
             newState.setDamage(currentState.getDamage() + .1);
         }
-        if (currentState.getConditions().ENEMYINSIGHTS()) {
+        if (currentState.getConditions().ENEMYINSIGHTS() && currentState.getConditions().OUTOFFUEL()) {
             newState.getConditions().setENEMYINSIGHTS(false);
         }
-        if (currentState.getConditions().INENEMYSIGHTS()) {
+        if (currentState.getConditions().INENEMYSIGHTS() && currentState.getConditions().OUTOFFUEL()) {
             newState.getConditions().setINENEMYSIGHTS(false);
         }
-        if (currentState.getConditions().APPROACHINGOBSTACLE()) {
+        if (currentState.getConditions().APPROACHINGOBSTACLE() && currentState.getConditions().OUTOFFUEL()) {
             newState.getConditions().setAPPROACHINGOBSTACLE(false);
         }
         if (!currentState.getConditions().OUTOFFUEL()) {
