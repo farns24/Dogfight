@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BritishPilot extends Pilot{
@@ -13,9 +14,21 @@ public class BritishPilot extends Pilot{
 			List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
 		
 		try {
-			plane.goForward(5);
+			plane.turnLeft(1);
+			
+//			for (Boundaries bound: bounds)
+//			{
+//				if (Math.abs(bound.getCoord()[0])<10 &&Math.abs(bound.getCoord()[1])<20)
+//				{
+//					System.out.println(Arrays.toString(bound.getCoord()));
+//					
+//					return;
+//				}
+//			}
+//			plane.goForward(3);
+			//plane.turnLeft(1);
 		} catch (OutOfFuelException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

@@ -13,7 +13,8 @@ public class NormalizedMap implements INormalizedMap {
 	private static final int MapSize = 200;
 	private List<EnemyPosition> enemies = new ArrayList<EnemyPosition>();
 	private List<Boundaries> bounds = new ArrayList<Boundaries>();
-	private List<Base> bases;
+	private List<Base> bases = new ArrayList<Base>();
+	private List<AntiAirPosition> antiAirs = new ArrayList<AntiAirPosition>();
 
 	public NormalizedMap(IPosition fighter, HashMap<Integer, IPosition> pilots2Position, HashMap<Integer, IPosition> bounds2Positions, HashMap<Integer, IPosition> antiAir2Positions, HashMap<Integer, IPosition> base2position, Map<Integer, Integer> base2Fighters) {
 		
@@ -140,6 +141,13 @@ public class NormalizedMap implements INormalizedMap {
 				bases.add(new Base(normPos));
 		}
 		
+		for (Entry<Integer,IPosition> entry: antiAir2Positions.entrySet())
+		{
+			
+				IPosition normPos = normalizePosition(fighter,entry.getValue(),entry.getKey());
+				antiAirs.add(new AntiAirPosition(normPos));
+		}
+		
 		
 	}
 
@@ -177,7 +185,6 @@ public class NormalizedMap implements INormalizedMap {
 
 	@Override
 	public List<Obstical> getObsticals() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -217,11 +224,11 @@ public class NormalizedMap implements INormalizedMap {
 			{
 				if (map[i][j]==0)
 				{
-					sb.append(" - ");
+					sb.append("-");
 				}
 				else
 				{
-					sb.append(" ").append(map[i][j]).append(" ");
+					sb.append(map[i][j]);
 				}
 			}
 			sb.append("\n");
@@ -233,7 +240,6 @@ public class NormalizedMap implements INormalizedMap {
 	}
 
 	private boolean isOnMap(IPosition en, int center) {
-		//System.out.println(Arrays.toString(en.getCoord()));
 		return Math.abs(en.getCoord()[0])<center
 				&&  Math.abs(en.getCoord()[1])<center;
 	}

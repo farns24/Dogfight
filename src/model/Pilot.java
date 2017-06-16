@@ -5,6 +5,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
+import callback.BiplaneEventListener;
+
 public abstract class Pilot implements IPilot{
 
 	protected IBiplane plane;
@@ -27,7 +29,7 @@ public abstract class Pilot implements IPilot{
 	}
 
 	@Override
-	public void respondToEnvironment(INormalizedMap map) {
+	public void respondToEnvironment(INormalizedMap map, BiplaneEventListener biplaneEventListener) {
 		
 		plane.updateLocation(map);
 		

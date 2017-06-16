@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import callback.BiplaneEventListener;
+
 import java.util.Set;
 
 public abstract class BattleField  implements IBattleField{
@@ -40,7 +43,7 @@ public abstract class BattleField  implements IBattleField{
 		//Initialize pilots
 		for (Integer pilotId: fighterIds)
 		{
-			pilots.put(pilotId, new BritishPilot(new SopwithCamel()));
+			pilots.put(pilotId, new BritishPilot(new FlightSimulator()));//new SopwithCamel()));
 		}
 		
 		
@@ -95,7 +98,14 @@ public abstract class BattleField  implements IBattleField{
 			
 			INormalizedMap normMap = new NormalizedMap(fighter,pilots2Position, bounds2Positions,antiAir2Positions,base2position,base2Fighters);
 			//Build normalized Map
-			entry.getValue().respondToEnvironment(normMap);
+			entry.getValue().respondToEnvironment(normMap, new BiplaneEventListener() {
+				
+				@Override
+				public void onFire(Set<IRound> shotsFired) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			System.out.println(normMap.toString());
 		}
 		

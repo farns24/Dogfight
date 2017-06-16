@@ -6,22 +6,28 @@ import java.util.Set;
 
 public class FlightSimulator implements IBiplane {
 
-	int speed;
+	FlightSimulatorEngine engine = FlightSimulatorEngine.getInstance();
+//	int speed;
+	double health = 20;
+	double damage = 0;
+	private int ammo = 100;
+	private int fuel = 300;
 	
 	@Override
 	public void goForward(int speed) throws OutOfFuelException {
-		this.speed = speed;
+//		this.speed = speed;
+		engine.speed(speed,speed, "5");
 	}
 
 	@Override
 	public void turnLeft(int angularVelocity) throws OutOfFuelException {
-		// TODO Auto-generated method stub
+		engine.speed(3, 3+angularVelocity,"5");
 
 	}
 
 	@Override
 	public void turnRight(int angularVelocity) throws OutOfFuelException {
-		// TODO Auto-generated method stub
+		engine.speed(3+angularVelocity, 3,"5");
 
 	}
 
@@ -33,13 +39,12 @@ public class FlightSimulator implements IBiplane {
 
 	@Override
 	public double getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return damage/health;
 	}
 
 	@Override
 	public void takeDamage(int rounds) {
-		// TODO Auto-generated method stub
+		damage+= rounds;
 
 	}
 
@@ -52,24 +57,24 @@ public class FlightSimulator implements IBiplane {
 	@Override
 	public int getAmmo() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ammo;
 	}
 
 	@Override
 	public void reload(int rounds) {
-		// TODO Auto-generated method stub
+		ammo += rounds;
 
 	}
 
 	@Override
 	public int getFuel() {
 		// TODO Auto-generated method stub
-		return 0;
+		return fuel;
 	}
 
 	@Override
 	public void reFuel(int gallons) {
-		// TODO Auto-generated method stub
+		fuel  += gallons;
 
 	}
 

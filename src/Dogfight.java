@@ -7,6 +7,7 @@ import telnet.TaskException;
 import telnet.TelnetProxy;
 import model.BattleField;
 import model.FlightSchoolField;
+import model.FlightSimulatorEngine;
 import model.LocationScape;
 
 /**
@@ -20,26 +21,24 @@ public class Dogfight {
         fighterIds.add(5);
 		Set<Integer> boundaryIds = new TreeSet<Integer>();
 		boundaryIds.add(79);
-		boundaryIds.add(27);
-		boundaryIds.add(76);
-		boundaryIds.add(95);
 		
 		Set<Integer> antiAircraftIds = new TreeSet<Integer>();
 		Map<Integer, Integer> baseId2FighterIdMap = new HashMap<Integer, Integer>();
 		BattleField field = new FlightSchoolField(fighterIds, boundaryIds, antiAircraftIds, baseId2FighterIdMap);
         
-		TelnetProxy proxy = new TelnetProxy();
+		//TelnetProxy proxy = new TelnetProxy();
+		FlightSimulatorEngine proxy = FlightSimulatorEngine.getInstance();
 		try {
-			proxy.connectToBot();
+			//proxy.connectToBot();
 	
 		
-		//while (true){
+		while (true){
 			
 			LocationScape map = proxy.where();
 			field.updateBattleField(map);
 			
-		//	}
-		} catch (TaskException e) {
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

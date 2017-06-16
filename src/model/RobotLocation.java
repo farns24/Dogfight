@@ -14,6 +14,18 @@ public class RobotLocation {
 		return corners;
 	}
 
+	public RobotLocation(double[][] corners, double[] orientation, double[] center) {
+		super();
+		this.corners = corners;
+		this.orientation = orientation;
+		this.center = center;
+	}
+
+	public RobotLocation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setCorners(double[][] corners) {
 		this.corners = corners;
 	}
@@ -50,6 +62,18 @@ public class RobotLocation {
 	public void setCenter(double[] center) {
 		this.center = center;
 	}
+
+	public void setCenter(int[] center)
+	{
+		this.center = convertFromField(center);
+	}
+	
+private double[] convertFromField(int[] pos) {
+    //truncating intentionally
+    double x = pos[0]*10;
+    double y = pos[1]*10;
+    return new double[] {x,y};
+}
 
 //    public int[] getPFVector(PotentialField pF) {
 //        int[] pFLocation = getCenter();
