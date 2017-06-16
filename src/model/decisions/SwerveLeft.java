@@ -1,9 +1,6 @@
 package model.decisions;
 
 import model.*;
-import Conditions.Conditions;
-
-import java.util.List;
 
 /**
  * Created by michael on 6/12/17.
@@ -26,24 +23,23 @@ public class SwerveLeft implements IDecision {
     }
 
     @Override
-    public GameState simulate(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
-                              List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals, Conditions c) {
+    public GameState simulate(GameState currentState) {
 
-        GameState newState = new GameState(new SwerveLeft(plane, 5), isAlive, fuelLeft, damage, ammoLeft,
-                enemies, bounds, bases, obsticals, c);
+        GameState newState = currentState;
+        newState.setAction(new SwerveLeft(plane, 5));
 
-        if (c.OUTOFFUEL() && c.INENEMYSIGHTS()) {
-            newState.setDamage(damage + .1);
-        } else if (c.ENEMYINSIGHTS()) {
+        if (currentState.getConditions().OUTOFFUEL() && currentState.getConditions().INENEMYSIGHTS()) {
+            newState.setDamage(currentState.getDamage() + .1);
+        } else if (currentState.getConditions().ENEMYINSIGHTS()) {
             newState.getConditions().setENEMYINSIGHTS(false);
-        } else if (c.INENEMYSIGHTS()) {
+        } else if (currentState.getConditions().INENEMYSIGHTS()) {
             newState.getConditions().setINENEMYSIGHTS(false);
-        } else if (c.APPROACHINGOBSTACLE()) {
+        } else if (currentState.getConditions().APPROACHINGOBSTACLE()) {
             newState.getConditions().setAPPROACHINGOBSTACLE(false);
         }
-        if (!c.OUTOFFUEL()) {
+        if (!currentState.getConditions().OUTOFFUEL()) {
             //Move Self
-            newState.setFuelLeft(fuelLeft - fuelConsumption);
+            newState.setFuelLeft(currentState.getFuelLeft() - fuelConsumption);
             if (newState.getFuelLeft() < fuelConsumption) {
                 newState.getConditions().setOUTOFFUEL(true);
             }

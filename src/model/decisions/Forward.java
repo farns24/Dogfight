@@ -1,10 +1,6 @@
 package model.decisions;
 
-import Conditions.Conditions;
 import model.*;
-
-import java.util.List;
-
 /**
  * Created by michael on 6/16/17.
  */
@@ -24,20 +20,19 @@ public class Forward implements IDecision {
     }
 
     @Override
-    public GameState simulate(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
-                              List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals, Conditions c) {
+    public GameState simulate(GameState currentState) {
 
-        GameState newState = new GameState(new Forward(plane), isAlive, fuelLeft, damage, ammoLeft, enemies, bounds,
-                bases, obsticals, c);
+        GameState newState = currentState;
+        newState.setAction(new Forward(plane));
 
-        if (c.INENEMYSIGHTS()) {
-            newState.setDamage(damage + .1);
-        }else if (c.APPROACHINGOBSTACLE()) {
+        if (currentState.getConditions().INENEMYSIGHTS()) {
+            newState.setDamage(currentState.getDamage() + .1);
+        }else if (currentState.getConditions().APPROACHINGOBSTACLE()) {
             newState.setAlive(false);
         }
-        if (!c.OUTOFFUEL()) {
+        if (!currentState.getConditions().OUTOFFUEL()) {
             //move self
-            newState.setFuelLeft(fuelLeft-fuelConsumption);
+            newState.setFuelLeft(currentState.getFuelLeft()-fuelConsumption);
             if (newState.getFuelLeft() < fuelConsumption) {
                 newState.getConditions().setOUTOFFUEL(true);
             }

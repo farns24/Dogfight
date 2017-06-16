@@ -1,11 +1,5 @@
 package model.decisions;
 
-import model.*;
-import Conditions.Conditions;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.List;
-
 /**
  * Created by michael on 6/12/17.
  */
@@ -23,21 +17,20 @@ public class Fire implements IDecision {
     }
 
     @Override
-    public GameState simulate(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
-                              List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals, Conditions c) {
+    public GameState simulate(GameState currentState) {
 
-        GameState newState = new GameState(new Fire(), isAlive, fuelLeft, damage, ammoLeft, enemies, bounds, bases,
-                obsticals, c);
+        GameState newState = currentState;
+        newState.setAction(new Fire());
 
-        if (c.INENEMYSIGHTS()) {
-            newState.setDamage(damage + .1);
-        } else if (c.ENEMYINSIGHTS() && !c.OUTOFAMMO()) {
+        if (currentState.getConditions().INENEMYSIGHTS()) {
+            newState.setDamage(currentState.getDamage() + .1);
+        } else if (currentState.getConditions().ENEMYINSIGHTS() && !currentState.getConditions().OUTOFAMMO()) {
                 //Damage appropriate enemy
-        } else if (c.APPROACHINGOBSTACLE() && !c.OUTOFFUEL()) {
+        } else if (currentState.getConditions().APPROACHINGOBSTACLE() && !currentState.getConditions().OUTOFFUEL()) {
             newState.setAlive(false);
         }
-        if (!c.OUTOFAMMO()) {
-            newState.setAmmoLeft(ammoLeft-ammoUsed);
+        if (!currentState.getConditions().OUTOFAMMO()) {
+            newState.setAmmoLeft(currentState.getAmmoLeft()-ammoUsed);
             if (newState.getAmmoLeft() < ammoUsed) {
                 newState.getConditions().setOUTOFAMMO(true);
             }
