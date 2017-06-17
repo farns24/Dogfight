@@ -52,7 +52,7 @@ public class GameState {
     }
 
     public boolean isTerminal() {
-        return enemies.size() == 0;
+        return enemies.size() == 0 || !isAlive;
     }
 
     public List<GameState> getPosFutures(Pilot p, boolean maximizingPlayer) {
@@ -99,8 +99,13 @@ public class GameState {
     }
 
     public double getScore() {
-        //To do
-        return 1;
+        if (conditions.ENEMYINSIGHTS()) {
+            return 1;
+        } else if (conditions.INENEMYSIGHTS()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
 //    public GameState hardCopy() {
@@ -119,7 +124,7 @@ public class GameState {
 //                conditions.OBSTICALTORIGHT(),conditions.OBSTICALTOLEFT(),conditions.ENEMYTOLEFT(),conditions.ENEMYTORIGHT());
 //
 //
-////        GameState newState = new GameState()
+//        GameState newState = new GameState()
 //    }
 
     public IDecision getActionTaken() {
