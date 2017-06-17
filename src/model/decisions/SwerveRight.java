@@ -42,9 +42,13 @@ public class SwerveRight implements IDecision {
         }
         if (!currentState.getConditions().OUTOFFUEL()) {
             //Move Self
-            newState.setFuelLeft(currentState.getFuelLeft() - fuelConsumption);
-            if (newState.getFuelLeft() < fuelConsumption) {
-                newState.getConditions().setOUTOFFUEL(true);
+            if (currentState.getConditions().OBSTICALTORIGHT()) {
+                newState.setAlive(false);
+            } else {
+//                newState.setFuelLeft(currentState.getFuelLeft() - fuelConsumption);
+//                if (newState.getFuelLeft() < fuelConsumption) {
+//                    newState.getConditions().setOUTOFFUEL(true);
+//                }
             }
         }
         //Test if approaching obstacle

@@ -1,6 +1,9 @@
 package model.decisions;
 
+import Conditions.Conditions;
 import model.*;
+
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by michael on 6/12/17.
@@ -27,24 +30,29 @@ public class SwerveLeft implements IDecision {
 
         GameState newState = currentState;
         newState.setAction(new SwerveLeft(plane, 5));
+        Conditions c = currentState.getConditions();
 
-        if (currentState.getConditions().OUTOFFUEL() && currentState.getConditions().INENEMYSIGHTS()) {
+        if (c.OUTOFFUEL() && c.INENEMYSIGHTS()) {
             newState.setDamage(currentState.getDamage() + .1);
         }
-        if (currentState.getConditions().ENEMYINSIGHTS() && !currentState.getConditions().OUTOFFUEL()) {
+        if (c.ENEMYINSIGHTS() && !c.OUTOFFUEL()) {
             newState.getConditions().setENEMYINSIGHTS(false);
         }
-        if (currentState.getConditions().INENEMYSIGHTS() && !currentState.getConditions().OUTOFFUEL()) {
+        if (c.INENEMYSIGHTS() && !c.OUTOFFUEL()) {
             newState.getConditions().setINENEMYSIGHTS(false);
         }
-        if (currentState.getConditions().APPROACHINGOBSTACLE() && !currentState.getConditions().OUTOFFUEL()) {
+        if (c.APPROACHINGOBSTACLE() && !c.OUTOFFUEL()) {
             newState.getConditions().setAPPROACHINGOBSTACLE(false);
         }
-        if (!currentState.getConditions().OUTOFFUEL()) {
+        if (!c.OUTOFFUEL()) {
             //Move Self
-            newState.setFuelLeft(currentState.getFuelLeft() - fuelConsumption);
-            if (newState.getFuelLeft() < fuelConsumption) {
-                newState.getConditions().setOUTOFFUEL(true);
+            if (c.OBSTICALTOLEFT()) {
+                newState.setAlive(false);
+            } else {
+//                newState.setFuelLeft(currentState.getFuelLeft() - fuelConsumption);
+//                if (newState.getFuelLeft() < fuelConsumption) {
+//                    newState.getConditions().setOUTOFFUEL(true);
+//                }
             }
         }
         //Test if approaching obstacle
