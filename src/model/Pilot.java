@@ -1,10 +1,8 @@
 package model;
 
-import Conditions.Conditions;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.List;
 
+import Conditions.Conditions;
 import callback.BiplaneEventListener;
 
 public abstract class Pilot implements IPilot{
@@ -25,7 +23,7 @@ public abstract class Pilot implements IPilot{
 	}
 
 	public Conditions determineConditions() {
-		throw new NotImplementedException();
+		throw new RuntimeException("Not Implimented");
 	}
 
 	@Override

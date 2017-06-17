@@ -10,6 +10,10 @@ public class Conditions {
     private boolean OUTOFAMMO;
     private boolean OUTOFFUEL;
     private boolean APPROACHINGOBSTACLE;
+	private boolean OBSTICALTORIGHT;
+	private boolean OBSTICALTOLEFT;
+	private boolean ENEMYTOLEFT;
+	private boolean ENEMYTORight;
 
     public Conditions(boolean ENEMYINSIGHTS, boolean INENEMYSIGHTS, boolean SEARCHING, boolean OUTOFAMMO,
                       boolean OUTOFFUEL, boolean APPROACHINGOBSTACLE) {
@@ -77,4 +81,24 @@ public class Conditions {
     public void setAPPROACHINGOBSTACLE(boolean APPROACHINGOBSTACLE) {
         this.APPROACHINGOBSTACLE = APPROACHINGOBSTACLE;
     }
+
+	public void setObsticalToRight(boolean b) {
+		this.OBSTICALTORIGHT = b;
+		
+	}
+
+	public void setObsticalToLeft(boolean b) {
+		this.OBSTICALTOLEFT = b;
+		
+	}
+
+	public void setENEMYToLeft(boolean b) {
+		this.ENEMYTOLEFT = b;
+		
+	}
+
+	public void setEnemyToRight(boolean b) {
+		this.ENEMYTORight = b;
+		
+	}
 }

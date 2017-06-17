@@ -3,8 +3,13 @@ package model;
 import java.util.Arrays;
 import java.util.List;
 
+import Conditions.ConditionFinder;
+import Conditions.Conditions;
+
 public class BritishPilot extends Pilot{
 
+	private ConditionFinder cf = new ConditionFinder();
+	
 	public BritishPilot(IBiplane plane) {
 		super(plane);
 	}
@@ -13,21 +18,25 @@ public class BritishPilot extends Pilot{
 	public void respond(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<EnemyPosition> enemies,
 			List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals) {
 		
+		
+		
+		Conditions cond = cf.getConditions(enemies,bounds,bases,obsticals);
+		
+		
+		/* Check nearfield conditions. if none exist, find far-field enemy fighter. 
+		 * 
+		 */
+		
+		
+		
 		try {
-			plane.turnLeft(1);
+//		plane.turnRight(1);
+			plane.fire(12);
 			
-//			for (Boundaries bound: bounds)
-//			{
-//				if (Math.abs(bound.getCoord()[0])<10 &&Math.abs(bound.getCoord()[1])<20)
-//				{
-//					System.out.println(Arrays.toString(bound.getCoord()));
-//					
-//					return;
-//				}
-//			}
-//			plane.goForward(3);
-			//plane.turnLeft(1);
-		} catch (OutOfFuelException e) {
+			
+			//plane.goForward(5);
+		
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}

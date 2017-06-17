@@ -58,6 +58,7 @@ public class TelnetProxy implements ITelnetProxy {
 	//        readUntil(prompt);
 	        //LOG.debug("Prompt found. Ready.");
 	    } catch (IOException ioe) {
+	    	System.out.println("Found the problem");
 	        throw new TaskException(ioe);
 	    }
 	
@@ -121,8 +122,10 @@ public class TelnetProxy implements ITelnetProxy {
      * Writes the value to the output stream. 
      */ 
     private void write(String value) { 
+    	
         out.println(value); 
         out.flush(); 
+    	
         //System.out.println(value); 
     } 
  

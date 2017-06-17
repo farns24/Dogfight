@@ -1,12 +1,12 @@
 package model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.List;
 import java.util.Set;
 
-public class Biplane implements IBiplane {
+import audio.SoundPlayer;
 
+public class Biplane implements IBiplane {
+	SoundPlayer player = new SoundPlayer();
 	private boolean isAlive = true;
 
 	@Override
@@ -47,7 +47,7 @@ public class Biplane implements IBiplane {
 
 	@Override
 	public Set<IRound> fire(int rounds) throws OutOfAmmoException {
-		// TODO Auto-generated method stub
+		player.fireGuns();
 		return null;
 	}
 
@@ -93,8 +93,8 @@ public class Biplane implements IBiplane {
 		isAlive = false;
 	}
 
-	@Override
-	public Position getPosition() {
-		throw new NotImplementedException();
-	}
+//	@Override
+//	public Position getPosition() {
+//		throw new NotImplementedException();
+//	}
 }

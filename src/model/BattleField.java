@@ -43,7 +43,7 @@ public abstract class BattleField  implements IBattleField{
 		//Initialize pilots
 		for (Integer pilotId: fighterIds)
 		{
-			pilots.put(pilotId, new BritishPilot(new FlightSimulator()));//new SopwithCamel()));
+			pilots.put(pilotId, new BritishPilot(new FlightSimulator()));//SopwithCamel()));
 		}
 		
 		
@@ -89,25 +89,33 @@ public abstract class BattleField  implements IBattleField{
 		
 		//Update pilots
 		
-		for (Entry<Integer,Pilot> entry :pilots.entrySet())
-		{
-			Pilot p = entry.getValue();
-			
-			IPosition fighter = pilots2Position.get(entry.getKey());
-			
-			
-			INormalizedMap normMap = new NormalizedMap(fighter,pilots2Position, bounds2Positions,antiAir2Positions,base2position,base2Fighters);
-			//Build normalized Map
-			entry.getValue().respondToEnvironment(normMap, new BiplaneEventListener() {
-				
-				@Override
-				public void onFire(Set<IRound> shotsFired) {
-					// TODO Auto-generated method stub
+			for (Entry<Integer,Pilot> entry :pilots.entrySet())
+			{
+				INormalizedMap normMap;
+				try {
+					Pilot p = entry.getValue();
 					
+					IPosition fighter = pilots2Position.get(entry.getKey());
+					
+					
+					normMap = new NormalizedMap(fighter,pilots2Position, bounds2Positions,antiAir2Positions,base2position,base2Fighters);
+					//Build normalized Map
+					entry.getValue().respondToEnvironment(normMap, new BiplaneEventListener() {
+						
+						@Override
+						public void onFire(Set<IRound> shotsFired) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+
+					System.out.println(normMap.toString());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-			System.out.println(normMap.toString());
-		}
+			}
+		
 		
 		
 	}

@@ -1,11 +1,12 @@
 package model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Set;
 
-public class FlightSimulator implements IBiplane {
+import audio.SoundPlayer;
 
+public class FlightSimulator implements IBiplane {
+	
+	SoundPlayer sounds = new SoundPlayer();
 	FlightSimulatorEngine engine = FlightSimulatorEngine.getInstance();
 //	int speed;
 	double health = 20;
@@ -50,7 +51,8 @@ public class FlightSimulator implements IBiplane {
 
 	@Override
 	public Set<IRound> fire(int rounds) throws OutOfAmmoException {
-		// TODO Auto-generated method stub
+		sounds.fireGuns();
+		
 		return null;
 	}
 
@@ -91,11 +93,12 @@ public class FlightSimulator implements IBiplane {
 
 	@Override
 	public void die() {
-		throw new NotImplementedException();
+		throw new RuntimeException("Not implimented");
+//		throw new NotImplementedException();
 	}
 
-	@Override
-	public Position getPosition() {
-		throw new NotImplementedException();
-	}
+//	@Override
+//	public Position getPosition() {
+//		throw new NotImplementedException();
+//	}
 }

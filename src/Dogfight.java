@@ -19,8 +19,9 @@ public class Dogfight {
         
         Set<Integer> fighterIds = new TreeSet<Integer>();
         fighterIds.add(5);
+        fighterIds.add(6);
 		Set<Integer> boundaryIds = new TreeSet<Integer>();
-		boundaryIds.add(79);
+		boundaryIds.add(23);
 		
 		Set<Integer> antiAircraftIds = new TreeSet<Integer>();
 		Map<Integer, Integer> baseId2FighterIdMap = new HashMap<Integer, Integer>();
@@ -29,7 +30,7 @@ public class Dogfight {
 		//TelnetProxy proxy = new TelnetProxy();
 		FlightSimulatorEngine proxy = FlightSimulatorEngine.getInstance();
 		try {
-			//proxy.connectToBot();
+			proxy.connectToBot();
 	
 		
 		while (true){

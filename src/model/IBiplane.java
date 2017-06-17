@@ -52,6 +52,6 @@ public interface IBiplane {
 	
 	public IAlarmSuite updateLocation(INormalizedMap map);
 
-	public Position getPosition();
+	//public Position getPosition();
 	
 }
