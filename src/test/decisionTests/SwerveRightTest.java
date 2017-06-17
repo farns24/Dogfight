@@ -6,18 +6,18 @@ import model.Biplane;
 import model.IBiplane;
 import model.Pilot;
 import model.decisions.GameState;
-import model.decisions.SwerveLeft;
+import model.decisions.SwerveRight;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by michael on 6/16/17.
+ * Created by michael on 6/17/17.
  */
-public class SwerveLeftTest {
+public class SwerveRightTest {
     IBiplane plane;
     Pilot pilot;
     GameState currentState;
-    SwerveLeft swerveLeft;
+    SwerveRight swerveRight;
 
     @Before
     public void setUp() throws Exception {
@@ -25,7 +25,7 @@ public class SwerveLeftTest {
         pilot = new BasicPilot(plane);
         currentState = new GameState(true, 10, 0, 10, null, null,
                 null, null, null);
-        swerveLeft = new SwerveLeft(plane, 5);
+        swerveRight = new SwerveRight(plane, 5);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class SwerveLeftTest {
                 false, false);
         currentState.setConditions(c);
 
-        GameState result = swerveLeft.simulate(currentState);
+        GameState result = swerveRight.simulate(currentState);
         Conditions rc = result.getConditions();
         assert(!rc.ENEMYINSIGHTS());
         assert(!rc.INENEMYSIGHTS());
@@ -50,7 +50,7 @@ public class SwerveLeftTest {
         currentState.setConditions(c);
         currentState.setFuelLeft(1);
 
-        GameState result = swerveLeft.simulate(currentState);
+        GameState result = swerveRight.simulate(currentState);
         Conditions rc = result.getConditions();
         assert(!rc.ENEMYINSIGHTS());
         assert(!rc.INENEMYSIGHTS());
@@ -66,7 +66,7 @@ public class SwerveLeftTest {
         currentState.setConditions(c);
         currentState.setFuelLeft(0);
 
-        GameState result = swerveLeft.simulate(currentState);
+        GameState result = swerveRight.simulate(currentState);
         Conditions rc = result.getConditions();
         assert(rc.ENEMYINSIGHTS());
         assert(rc.INENEMYSIGHTS());
@@ -81,7 +81,7 @@ public class SwerveLeftTest {
                 false, true);
         currentState.setConditions(c);
 
-        GameState result = swerveLeft.simulate(currentState);
+        GameState result = swerveRight.simulate(currentState);
         Conditions rc = result.getConditions();
         assert(!rc.ENEMYINSIGHTS());
         assert(!rc.INENEMYSIGHTS());
@@ -98,7 +98,7 @@ public class SwerveLeftTest {
         currentState.setConditions(c);
         currentState.setFuelLeft(0);
 
-        GameState result = swerveLeft.simulate(currentState);
+        GameState result = swerveRight.simulate(currentState);
         Conditions rc = result.getConditions();
         assert(!rc.ENEMYINSIGHTS());
         assert(!rc.INENEMYSIGHTS());
