@@ -13,16 +13,21 @@ public class Conditions {
 	private boolean OBSTICALTORIGHT;
 	private boolean OBSTICALTOLEFT;
 	private boolean ENEMYTOLEFT;
-	private boolean ENEMYTORight;
+	private boolean ENEMYTORIGHT;
 
     public Conditions(boolean ENEMYINSIGHTS, boolean INENEMYSIGHTS, boolean SEARCHING, boolean OUTOFAMMO,
-                      boolean OUTOFFUEL, boolean APPROACHINGOBSTACLE) {
+                      boolean OUTOFFUEL, boolean APPROACHINGOBSTACLE, boolean OBSTICALTORIGHT, boolean OBSTICALTOLEFT,
+                      boolean ENEMYTOLEFT, boolean ENEMYTORIGHT) {
         this.ENEMYINSIGHTS = ENEMYINSIGHTS;
         this.INENEMYSIGHTS = INENEMYSIGHTS;
         this.SEARCHING = SEARCHING;
         this.OUTOFAMMO = OUTOFAMMO;
         this.OUTOFFUEL = OUTOFFUEL;
         this.APPROACHINGOBSTACLE = APPROACHINGOBSTACLE;
+        this.OBSTICALTORIGHT = OBSTICALTORIGHT;
+        this.OBSTICALTOLEFT = OBSTICALTOLEFT;
+        this.ENEMYTOLEFT = ENEMYTOLEFT;
+        this.ENEMYTORIGHT = ENEMYTORIGHT;
     }
 
     public Conditions() {
@@ -32,6 +37,10 @@ public class Conditions {
         this.OUTOFAMMO = false;
         this.OUTOFFUEL = false;
         this.APPROACHINGOBSTACLE = false;
+        this.OBSTICALTORIGHT = false;
+        this.OBSTICALTOLEFT = false;
+        this.ENEMYTOLEFT = false;
+        this.ENEMYTORIGHT = false;
     }
 
     public boolean ENEMYINSIGHTS() {
@@ -98,7 +107,12 @@ public class Conditions {
 	}
 
 	public void setEnemyToRight(boolean b) {
-		this.ENEMYTORight = b;
+		this.ENEMYTORIGHT = b;
 		
 	}
+
+    public boolean somethingNearby() {
+        return ENEMYINSIGHTS || INENEMYSIGHTS || APPROACHINGOBSTACLE || OBSTICALTOLEFT || OBSTICALTORIGHT ||
+                ENEMYTOLEFT || ENEMYTORIGHT;
+    }
 }

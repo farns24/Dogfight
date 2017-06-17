@@ -31,6 +31,7 @@ public class SwerveRightTest {
     @Test
     public void simulation1() throws Exception {
         Conditions c = new Conditions(true, true, false, false,
+                false, false, false, false,
                 false, false);
         currentState.setConditions(c);
 
@@ -46,6 +47,7 @@ public class SwerveRightTest {
     @Test
     public void simulation2() throws Exception {
         Conditions c = new Conditions(true, true, false, false,
+                false, false, false, false,
                 false, false);
         currentState.setConditions(c);
         currentState.setFuelLeft(1);
@@ -62,7 +64,8 @@ public class SwerveRightTest {
     @Test
     public void simulation3() throws Exception {
         Conditions c = new Conditions(true, true, false, false,
-                true, false);
+                true, false, false, false,
+                false, false);
         currentState.setConditions(c);
         currentState.setFuelLeft(0);
 
@@ -78,7 +81,8 @@ public class SwerveRightTest {
     @Test
     public void simulation4() throws Exception {
         Conditions c = new Conditions(false, false, false, false,
-                false, true);
+                false, true, false, false,
+                false, false);
         currentState.setConditions(c);
 
         GameState result = swerveRight.simulate(currentState);
@@ -94,7 +98,8 @@ public class SwerveRightTest {
     @Test
     public void simulation5() throws Exception {
         Conditions c = new Conditions(false, false, false, false,
-                true, true);
+                true, true, false, false,
+                false, false);
         currentState.setConditions(c);
         currentState.setFuelLeft(0);
 
