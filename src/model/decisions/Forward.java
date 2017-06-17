@@ -15,8 +15,12 @@ public class Forward implements IDecision {
     }
 
     @Override
-    public void execute() {
-
+    public void execute(IBiplane p) {
+        try {
+            p.goForward(5);
+        } catch (OutOfFuelException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

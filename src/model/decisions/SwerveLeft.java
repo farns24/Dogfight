@@ -3,8 +3,6 @@ package model.decisions;
 import Conditions.Conditions;
 import model.*;
 
-import java.util.concurrent.locks.Condition;
-
 /**
  * Created by michael on 6/12/17.
  */
@@ -21,8 +19,12 @@ public class SwerveLeft implements IDecision {
     }
 
     @Override
-    public void execute() {
-
+    public void execute(IBiplane p) {
+        try {
+            p.turnLeft(1);
+        } catch (OutOfFuelException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -45,7 +47,7 @@ public class SwerveLeft implements IDecision {
             newState.getConditions().setAPPROACHINGOBSTACLE(false);
         }
         if (!c.OUTOFFUEL()) {
-            //Move Self
+
             if (c.OBSTICALTOLEFT()) {
                 newState.setAlive(false);
             } else {

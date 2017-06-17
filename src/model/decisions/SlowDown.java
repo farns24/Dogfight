@@ -1,5 +1,7 @@
 package model.decisions;
 
+import model.IBiplane;
+
 /**
  * Created by michael on 6/12/17.
  */
@@ -12,7 +14,7 @@ public class SlowDown implements IDecision {
     }
 
     @Override
-    public void execute() {
+    public void execute(IBiplane p) {
 
     }
 

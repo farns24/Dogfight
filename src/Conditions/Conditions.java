@@ -110,6 +110,7 @@ public class Conditions {
 		this.ENEMYTORIGHT = b;
 
 	}
+
     public boolean OBSTICALTORIGHT() {
         return OBSTICALTORIGHT;
     }
@@ -130,6 +131,4 @@ public class Conditions {
         return ENEMYINSIGHTS || INENEMYSIGHTS || APPROACHINGOBSTACLE || OBSTICALTOLEFT || OBSTICALTORIGHT ||
                 ENEMYTOLEFT || ENEMYTORIGHT;
     }
-
-
 }

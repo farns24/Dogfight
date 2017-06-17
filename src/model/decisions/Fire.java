@@ -1,5 +1,8 @@
 package model.decisions;
 
+import model.IBiplane;
+import model.OutOfAmmoException;
+
 /**
  * Created by michael on 6/12/17.
  */
@@ -12,8 +15,12 @@ public class Fire implements IDecision {
     }
 
     @Override
-    public void execute() {
-
+    public void execute(IBiplane p) {
+        try {
+            p.fire(12);
+        } catch (OutOfAmmoException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

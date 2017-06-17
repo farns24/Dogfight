@@ -111,6 +111,25 @@ public class GameState {
         return score;
     }
 
+//    public GameState hardCopy() {
+//        List<Enemy> newEnemies = new ArrayList<>();
+//        for (Enemy e : enemies) {
+//            IBiplane ePlane = e.getPlane();
+//            IBiplane newPlane = new FlightSimulator();
+//            Enemy newEnemy = new Enemy(newPlane);
+//        }
+//
+//        List<Boundaries> newBounds = new ArrayList<>();
+//        List<Base> newBases = new ArrayList<>();
+//        List<Obstical> newObsticals = new ArrayList<>();
+//        Conditions newConditions = new Conditions(conditions.ENEMYINSIGHTS(), conditions.INENEMYSIGHTS(),
+//                conditions.SEARCHING(),conditions.OUTOFAMMO(),conditions.OUTOFFUEL(),conditions.APPROACHINGOBSTACLE(),
+//                conditions.OBSTICALTORIGHT(),conditions.OBSTICALTOLEFT(),conditions.ENEMYTOLEFT(),conditions.ENEMYTORIGHT());
+//
+//
+////        GameState newState = new GameState()
+//    }
+
     public IDecision getActionTaken() {
         return actionTook;
     }

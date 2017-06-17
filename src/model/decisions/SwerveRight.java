@@ -18,8 +18,12 @@ public class SwerveRight implements IDecision {
     }
 
     @Override
-    public void execute() {
-
+    public void execute(IBiplane p) {
+        try {
+            p.turnRight(1);
+        } catch (OutOfFuelException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
