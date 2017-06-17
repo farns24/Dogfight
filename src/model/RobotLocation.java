@@ -2,6 +2,8 @@ package model;
 
 import java.util.Arrays;
 
+import potentialFields.PotentialField;
+
 public class RobotLocation {
 
 	private double[][] corners;
@@ -75,13 +77,14 @@ private double[] convertFromField(int[] pos) {
     return new double[] {x,y};
 }
 
-//    public int[] getPFVector(PotentialField pF) {
-//        int[] pFLocation = getCenter();
-//        int row = pFLocation[1];
-//        int col = pFLocation[0];
-//        System.out.println("Field = " +Arrays.toString( pF.getField()[row][col]));
-//        return pF.getField()[row][col];
-//    }
+    public int[] getPFVector(PotentialField pF) {
+        int[] pFLocation = getCenter();
+        int row = Math.abs(pFLocation[1]);
+        int col = Math.abs(pFLocation[0]);
+        System.out.println("Position = " + Arrays.toString(pFLocation));
+        System.out.println("Field = " +Arrays.toString( pF.getField()[row][col]));
+        return pF.getField()[row][col];
+    }
     
     public double getGoalTheta(int[] pos)
     {

@@ -97,6 +97,12 @@ public class FlightSimulator implements IBiplane {
 //		throw new NotImplementedException();
 	}
 
+	@Override
+	public LocationScape getRadar() {
+		// TODO Auto-generated method stub
+		return engine.where();
+	}
+
 //	@Override
 //	public Position getPosition() {
 //		throw new NotImplementedException();

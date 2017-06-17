@@ -111,6 +111,18 @@ public class SopwithCamel implements IBiplane {
 		return null;
 	}
 
+	@Override
+	public LocationScape getRadar() {
+		// TODO Auto-generated method stub
+		try {
+			return proxy.where();
+		} catch (TaskException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 //	@Override
 //	public Position getPosition() {
 //		throw new NotImplementedException();

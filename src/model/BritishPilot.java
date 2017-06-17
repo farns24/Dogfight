@@ -10,11 +10,12 @@ import alpha_beta.AlphaBetaSolver;
 import model.decisions.GameState;
 import model.decisions.IDecision;
 import potentialFields.IPotentialFields;
+import potentialFields.PotentialFieldFinder;
 
 public class BritishPilot extends Pilot{
 
 	private ConditionFinder cf = new ConditionFinder();
-	private IPotentialFields pf;
+	private IPotentialFields pf = new PotentialFieldFinder();
 	
 	public BritishPilot(IBiplane plane) {
 		super(plane);
@@ -43,7 +44,7 @@ public class BritishPilot extends Pilot{
 		
 		try {
 //		plane.turnRight(1);
-			plane.fire(12);
+		//	plane.fire(12);
 			
 			
 			//plane.goForward(5);

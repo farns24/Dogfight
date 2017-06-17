@@ -20,7 +20,7 @@ public class FlightSimulatorEngine {
 		location = new LocationScape();
 		location.put("5", new RobotLocation(new double[4][2],new double[]{0,1},new double[]{200,200}));
 		
-		location.put("6", new RobotLocation(new double[4][2],new double[]{0,1},new double[]{250,200}));
+		location.put("6", new RobotLocation(new double[4][2],new double[]{0,1},new double[]{15,30}));
 		
 		location.put("23", new RobotLocation(new double[4][2],new double[]{0,1},new double[]{0,0}));
 			

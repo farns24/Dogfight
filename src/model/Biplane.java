@@ -93,6 +93,12 @@ public class Biplane implements IBiplane {
 		isAlive = false;
 	}
 
+	@Override
+	public LocationScape getRadar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //	@Override
 //	public Position getPosition() {
 //		throw new NotImplementedException();
