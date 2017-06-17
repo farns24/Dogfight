@@ -91,36 +91,40 @@ public class Conditions {
         this.APPROACHINGOBSTACLE = APPROACHINGOBSTACLE;
     }
 
+	public void setObsticalToRight(boolean b) {
+		this.OBSTICALTORIGHT = b;
+
+	}
+
+	public void setObsticalToLeft(boolean b) {
+		this.OBSTICALTOLEFT = b;
+
+	}
+
+	public void setENEMYToLeft(boolean b) {
+		this.ENEMYTOLEFT = b;
+
+	}
+
+	public void setEnemyToRight(boolean b) {
+		this.ENEMYTORIGHT = b;
+
+	}
+
     public boolean OBSTICALTORIGHT() {
         return OBSTICALTORIGHT;
-    }
-
-    public void setOBSTICALTORIGHT(boolean OBSTICALTORIGHT) {
-        this.OBSTICALTORIGHT = OBSTICALTORIGHT;
     }
 
     public boolean OBSTICALTOLEFT() {
         return OBSTICALTOLEFT;
     }
 
-    public void setOBSTICALTOLEFT(boolean OBSTICALTOLEFT) {
-        this.OBSTICALTOLEFT = OBSTICALTOLEFT;
-    }
-
     public boolean ENEMYTOLEFT() {
         return ENEMYTOLEFT;
     }
 
-    public void setENEMYTOLEFT(boolean ENEMYTOLEFT) {
-        this.ENEMYTOLEFT = ENEMYTOLEFT;
-    }
-
     public boolean ENEMYTORIGHT() {
         return ENEMYTORIGHT;
-    }
-
-    public void setENEMYTORIGHT(boolean ENEMYTORIGHT) {
-        this.ENEMYTORIGHT = ENEMYTORIGHT;
     }
 
     public boolean somethingNearby() {

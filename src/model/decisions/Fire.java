@@ -32,10 +32,10 @@ public class Fire implements IDecision {
             newState.setAlive(false);
         }
         if (!currentState.getConditions().OUTOFAMMO()) {
-            newState.setAmmoLeft(currentState.getAmmoLeft()-ammoUsed);
-            if (newState.getAmmoLeft() < ammoUsed) {
-                newState.getConditions().setOUTOFAMMO(true);
-            }
+//            newState.setAmmoLeft(currentState.getAmmoLeft()-ammoUsed);
+//            if (newState.getAmmoLeft() < ammoUsed) {
+//                newState.getConditions().setOUTOFAMMO(true);
+//            }
         }
         //Change enemies positions && change ENEMYINSIGHTS, INENEMYSIGHTS and SEARCHING accordingly
         return newState;
