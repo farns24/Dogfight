@@ -33,10 +33,12 @@ public class BritishPilot extends Pilot{
 		 */
 		if (cond.somethingNearby()) {
 			AlphaBetaSolver solver = new AlphaBetaSolver();
-			AlphaBetaResult result = null;//solver.alphabeta();
+			AlphaBetaResult result = solver.alphabeta(new GameState(isAlive, fuelLeft, damage, ammoLeft, enemies,
+					bounds, bases, obsticals, cond), 1, Double.MIN_VALUE, Double.MAX_VALUE, true,
+					this);
 			GameState gs = result.getGameState();
 			IDecision decision = gs.getActionTaken();
-			decision.execute();
+			decision.execute(plane);
 		} else {
 			pf.search(plane, enemies);
 		}

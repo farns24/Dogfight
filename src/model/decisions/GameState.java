@@ -16,13 +16,13 @@ public class GameState {
     int fuelLeft;
     double damage;
     int ammoLeft;
-    List<Enemy> enemies;
+    List<EnemyPosition> enemies;
     List<Boundaries> bounds;
     List<Base> bases;
     List<Obstical> obsticals;
     Conditions conditions;
 
-    public GameState(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<Enemy> enemies,
+    public GameState(boolean isAlive, int fuelLeft, double damage, int ammoLeft, List<EnemyPosition> enemies,
                      List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals, Conditions conditions) {
         this.actionTook = null;
         this.isAlive = isAlive;
@@ -37,7 +37,7 @@ public class GameState {
     }
 
     public GameState(IDecision actionTook, boolean isAlive, int fuelLeft, double damage, int ammoLeft,
-                     List<Enemy> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals,
+                     List<EnemyPosition> enemies, List<Boundaries> bounds, List<Base> bases, List<Obstical> obsticals,
                      Conditions conditions) {
         this.actionTook = actionTook;
         this.isAlive = isAlive;
@@ -52,12 +52,7 @@ public class GameState {
     }
 
     public boolean isTerminal() {
-        if(!isAlive) return true;
-        boolean enemiesRemain = false;
-        for (Enemy enemy : enemies) {
-            enemiesRemain = enemiesRemain || enemy.isAlive();
-        }
-        return !enemiesRemain;
+        return enemies.size() == 0;
     }
 
     public List<GameState> getPosFutures(Pilot p, boolean maximizingPlayer) {
@@ -104,11 +99,8 @@ public class GameState {
     }
 
     public double getScore() {
-        double score = 0;
-        for (Enemy enemy : enemies) {
-            score += enemy.getPlane().getDamage();
-        }
-        return score;
+        //To do
+        return 1;
     }
 
 //    public GameState hardCopy() {

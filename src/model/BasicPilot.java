@@ -23,6 +23,6 @@ public class BasicPilot extends Pilot {
         AlphaBetaResult result = null;//solver.alphabeta();
         GameState gs = result.getGameState();
         IDecision decision = gs.getActionTaken();
-        decision.execute();
+        decision.execute(plane);
     }
 }
